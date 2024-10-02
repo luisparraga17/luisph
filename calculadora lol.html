@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Básica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: sky blue;
+        }
+
+        .calculator {
+            border:8px solid black;
+            padding: 20px;
+            border-radius: 30px;
+            background-size: cover; 
+            background-position: center; 
+            background-image: url('https://www.xtrafondos.com/wallpapers/vertical/league-of-legends-world-2020-6213.jpg');
+        }
+
+        #display {
+            width: 82%;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 1px solid black;
+            border-radius: 20px;
+            background-color: silver;
+        }
+
+        .button {
+            width: 70px;
+            height: 70px;
+            font-size: 28px;
+            margin: 5px;
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+            border: 30px;
+            border-radius: 5px;
+            background-color: silver;
+            color: white;
+            font-weight:1000;
+            text-shadow: 2px 2px 0px #000,
+          -2px -2px 0px #000,
+          -2px 2px 0px #000,
+          2px -2px 0px #000;
+        }
+
+        .button:active {
+            background-color: orange;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .button[data-value="sqrt"] {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBtMJij3Y9lg8Y-M1mZKMaN_HIVPWk_MnEyp1UkavIhN2KmBogoeyE3o-lSlSkQ7XcbhQ&usqp=CAU');
+          
+        }
+
+        .button[data-value="evenOdd"] {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa8PZLpltLrezqJcbfvJ2V9Vh221nFzm_DFJsVXHYZeXIhyGS0vi7ysO7e8lWPAagdS0I&usqp=CAU');
+        }
+
+        .button[data-value="prime"] {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnDqmipYOcPgdsIcNh4QD0o02Hu2itz9weq7xSHyqU_EEsZYT3L47C6G4QC0lCAE-xzD0&usqp=CAU');
+        }
+
+        .button[data-value="square"] {
+           background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo9lDqLwSpTPdMMVywfLD0QOTWHkgT9QXbjKcxUrcjcdT_FqpqxykhLMCcFIt4yq3wyqg&usqp=CAU');
+        }
+
+        .button[data-value="C"] {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaOZKf1T1KvS0UK_6mYCHT4-ch_DjMX8Q5Ww&s');
+
+        }
+
+        .button[data-value="delete"] {
+            background-image: url('https://fbi.cults3d.com/uploaders/29003277/illustration-file/872c1226-7530-4d91-84e9-ebd2a416e57b/gwen.jpg');
+        }
+
+        .button[data-value="divide"] {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWunFbLiRLb9hrf0hrQecUDmF4YqYNL6WUDMiB4V5JgnuqMGQYg3TXGb188HB5MfqUD90&usqp=CAU');
+        }
+
+        .button[data-value="7"] {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyOSX_y7SFQMHGPcBGuFqzf8PxC4xyjb98FckjiDYY6TswtoRwX9PijK45jO3zN4po4rg&usqp=CAU');
+        }
+
+        .button[data-value="8"] {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHJpULNFV0sNK7DvD9F-DCcFvRyT0bTpqEc3XkVCkuW913x-czpAaGpTS6hH-jR6Ytwgc&usqp=CAU');
+        }
+
+        .button[data-value="9"] {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrQfmrRpjukf11sYZJz2qQ1bDD68gx8CMRqnffxLoeH1MPFzcHNMfIDkBEeFtJrkRfbHA&usqp=CAU');
+        }
+        .button[data-value="multiply"] {
+            background-image: url('https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/fec1ae47b7e5f84ac85a7c06cd18499fca375614-2048x2048.jpg');
+            
+        }
+        .button[data-value="4"] {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6SJssfyPgNoTqKvYdkiBzpeWxn76ErMyayQ_8-NyADt9mmK0NS6RX6oQT52F3drcZWrI&usqp=CAU');
+        }
+        .button[data-value="5"] {
+            background-image: url('https://i.pinimg.com/236x/bb/d9/81/bbd981d6d5bcffa401255852928e30dd.jpg');
+        }
+        .button[data-value="6"] {
+            background-image: url('https://i.pinimg.com/236x/19/6b/55/196b55ca36529a31c87b1175cbc279b9.jpg');
+        }
+        .button[data-value="minus"] {
+            background-image: url('https://www.zonadeleyendas.com/wp-content/uploads/2018/04/3460.jpg');
+        }
+        .button[data-value="1"] {
+            background-image: url('https://www.zonadeleyendas.com/wp-content/uploads/2018/04/3458.jpg');
+        }
+        .button[data-value="2"] {
+            background-image: url('https://www.zonadeleyendas.com/wp-content/uploads/2018/04/3462.jpg');
+        }
+        .button[data-value="3"] {
+            background-image: url('https://www.zonadeleyendas.com/wp-content/uploads/2018/04/3461.jpg');
+        }
+        .button[data-value="plus"] {
+            background-image: url('https://i.pinimg.com/736x/f4/b7/08/f4b708795dda91b70ae8c6c86f2c0c93.jpg');
+        }
+        .button[data-value="0"] {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyCszUvOTbLusNPS_nuUIvb_t5zKI1nFfwdQ&s');
+        }
+        .button[data-value="dot"] {
+            background-image: url('https://www.zonadeleyendas.com/wp-content/uploads/2018/04/3457.jpg');
+        }
+            .button[data-value="equal"] {
+                background-image: url('https://cdnb.artstation.com/p/assets/images/images/026/295/381/large/punbun-4fun-varus-champie-3.jpg?1588396465');
+            }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <div class="row">
+            <button class="button" data-value="sqrt" style="width: 80px;" onclick="squareRoot()">√</button>
+            <button class="button" data-value="evenOdd" style="width: 170px;" onclick="checkEvenOdd()">Par/Impar</button>
+            <button class="button" data-value="prime" style="width: 80px;" onclick="checkPrime()">Prim</button>
+        </div>
+        <div class="row">
+            <button class="button" data-value="square" style="width: 80px;" onclick="square()">x²</button>
+            <button class="button" data-value="C" style="width: 80px;" onclick="clearDisplay()">C</button>
+            <button class="button" data-value="delete" style="width: 80px;" onclick="deleteLast('←')">←</button>
+            <button class="button" data-value="divide" style="width: 80px;" onclick="appendToDisplay('/')">/</button>
+        </div>
+        <div class="row">
+            <button class="button" data-value="7" style="width: 80px;" onclick="appendToDisplay('7')">7</button>
+            <button class="button" data-value="8" style="width: 80px;" onclick="appendToDisplay('8')">8</button>
+            <button class="button" data-value="9" style="width: 80px;" onclick="appendToDisplay('9')">9</button>
+            <button class="button" data-value="multiply" style="width: 80px;" onclick="appendToDisplay('*')">*</button>
+        </div>
+        <div class="row">
+            <button class="button" data-value="4" style="width: 80px;" onclick="appendToDisplay('4')">4</button>
+            <button class="button" data-value="5" style="width: 80px;" onclick="appendToDisplay('5')">5</button>
+            <button class="button" data-value="6" style="width: 80px;" onclick="appendToDisplay('6')">6</button>
+            <button class="button" data-value="minus" style="width: 80px;" onclick="appendToDisplay('-')">-</button>
+        </div>
+        <div class="row">
+            <button class="button" data-value="1" style="width: 80px;" onclick="appendToDisplay('1')">1</button>
+            <button class="button" data-value="2" style="width: 80px;" onclick="appendToDisplay('2')">2</button>
+            <button class="button" data-value="3" style="width: 80px;" onclick="appendToDisplay('3')">3</button>
+            <button class="button" data-value="plus" style="width: 80px;" onclick="appendToDisplay('+')">+</button>
+        </div>
+        <div class="row">
+            <button class="button" data-value="0" style="width: 170px;" onclick="appendToDisplay('0')">0</button>
+            <button class="button" data-value="dot" style="width: 80px;" onclick="appendToDisplay('.')">.</button>
+            <button class="button" data-value="equal" style="width: 80px;" onclick="calculateResult('=')">=</button>
+        </div>
+    </div>
+
+    <script>
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function deleteLast() {
+            var display = document.getElementById('display').value;
+            document.getElementById('display').value = display.slice(0, -1);
+        }
+
+        function calculateResult() {
+            var display = document.getElementById('display').value;
+            try {
+                document.getElementById('display').value = eval(display);
+            } catch (error) {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+
+        function squareRoot() {
+            var display = parseFloat(document.getElementById('display').value);
+            if (!isNaN(display)) {
+                document.getElementById('display').value = Math.sqrt(display);
+            } else {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+
+        function square() {
+            var display = parseFloat(document.getElementById('display').value);
+            if (!isNaN(display)) {
+                document.getElementById('display').value = Math.pow(display, 2);
+            } else {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+
+        function checkEvenOdd() {
+            var display = parseInt(document.getElementById('display').value);
+            if (!isNaN(display)) {
+                if (display % 2 === 0) {
+                    alert(display + " es par");
+                } else {
+                    alert(display + " es impar");
+                }
+            } else {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+
+        function checkPrime() {
+            var display = parseInt(document.getElementById('display').value);
+            if (!isNaN(display) && display > 1) {
+                let isPrime = true;
+                for (let i = 2; i <= Math.sqrt(display); i++) {
+                    if (display % i === 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+                if (isPrime) {
+                    alert(display + " es primo");
+                } else {
+                    alert(display + " no es primo");
+     
+           }
+            } else {
+                alert("Ingrese un número mayor que 1");
+            }
+        }
+    </script>
